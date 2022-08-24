@@ -6,6 +6,7 @@ from django.views.static import serve
 from django.urls import re_path
 
 urlpatterns = [
+    path('jet/', include('jet.urls', 'jet')),
     path('admin/', admin.site.urls),
     path('',include("app.urls")),
     re_path(r'^media/(?P<path>.*)$', serve, {
