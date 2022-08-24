@@ -13,6 +13,7 @@ from django.http import JsonResponse
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.db.models import Q
 
 class ProductView(View):
     def get(self, request):
@@ -194,3 +195,16 @@ class ProfileView(View):
 def address(request):
     add = Customer.objects.filter(user=request.user)
     return render(request, 'app/address.html',{"add":add,'active':'btn-primary'})
+
+
+
+
+def search(request):
+    if 'q' in request.GET:
+        q = request.GET.get('q')
+        multiple_q = Q(title__icontains=q) | Q(description__icontains=q) | Q(brand__icontains=q) | Q(category__icontains=q)
+        product = Product.objects.filter(multiple_q)
+        print(product)
+        return render(request,'app/search.html',{"product":product, "l":len(product)})
+   
+        

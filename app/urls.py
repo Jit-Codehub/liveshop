@@ -4,6 +4,7 @@ from django.contrib.auth import views as auth_views
 from .forms import LoginForm, MyPasswordChangeForm ,MyPasswordResetForm, MySetPasswordForm
 urlpatterns = [
     path('', views.ProductView.as_view(), name='home'),
+    
     path('product-detail/<int:pk>/', views.ProductDetailView.as_view(), name='product-detail'),
 
     #cart urls
@@ -42,5 +43,7 @@ urlpatterns = [
     path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='app/password_reset_confirm.html', form_class=MySetPasswordForm), name="password_reset_confirm"),
 
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='app/password_reset_complete.html'), name="password_reset_complete"),
+
+    path('search/', views.search, name='search'),
     
 ]
