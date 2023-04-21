@@ -204,7 +204,7 @@ def search(request):
         q = request.GET.get('q')
         multiple_q = Q(title__icontains=q) | Q(description__icontains=q) | Q(brand__icontains=q) | Q(category__icontains=q)
         product = Product.objects.filter(multiple_q)
-        print(product)
+        print(len(product))
         return render(request,'app/search.html',{"product":product, "l":len(product)})
    
         
